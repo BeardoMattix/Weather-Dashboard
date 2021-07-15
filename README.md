@@ -4,7 +4,7 @@
 
 ## Link to Deployed Site
 
-[Weather Dashboard](https://beardomattix.github.io/Work-Day-Planner/)
+[Weather Dashboard](https://beardomattix.github.io/Weather-Dashboard/)
 
 ## Table of Contents
   * [Motivation and Technologies](#motivation)
@@ -26,8 +26,7 @@ I wanted to create a simple weather app that allows users to input a city and se
 ## Functionality
 
 ![Weather-DEMO](https://user-images.githubusercontent.com/82903201/125833228-4862c1f1-1a77-4414-a194-bb32068a36ef.gif)
-
-#### The demo shows the main functions of the quiz:
+#### The demo shows the main functions of the Weather Dashboard:
 * Users search for weather by typing in the name of a city.
 * The app makes a call to the open weather API and returns the current weather in the searched city, and a 5 day forecast.  
 * Searches are saved in local storage and displayed on the page under the search bar. 
