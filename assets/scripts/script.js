@@ -3,7 +3,8 @@ function initPage() {
   const searchEl = document.getElementById("search-button");
   const clearEl = document.getElementById("clear-history");
   const nameEl = document.getElementById("city-name");
-  const currentPicEl = document.getElementById("current-pic");
+  // This is to add a picture from openweathermap in the forecast
+  const currentPictureEl = document.getElementById("current-picture");
   const currentTempEl = document.getElementById("temperature");
   const currentHumidityEl = document.getElementById("humidity");
   4;
@@ -14,10 +15,8 @@ function initPage() {
   console.log(searchHistory);
 
   const APIKey = "e833b750544d242dcfab03294f768f62";
-  //  City name is read when the search button is clicked.
-
+// Function to get the current weather based on the user city input.
   function getWeather(cityName) {
-    //  Using saved city name, get the current condistions from openweathermap API
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
@@ -33,13 +32,13 @@ function initPage() {
       nameEl.innerHTML =
         response.data.name + " (" + month + "/" + day + "/" + year + ") ";
       let weatherPic = response.data.weather[0].icon;
-      currentPicEl.setAttribute(
+      currentPictureEl.setAttribute(
         "src",
         "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png"
       );
-      currentPicEl.setAttribute("alt", response.data.weather[0].description);
+      currentPictureEl.setAttribute("alt", response.data.weather[0].description);
       currentTempEl.innerHTML =
-        "Temperature: " + k2f(response.data.main.temp) + " &#176F";
+        "Temperature: " + kelvin2farenheit(response.data.main.temp) + " &#176F";
       currentHumidityEl.innerHTML =
         "Humidity: " + response.data.main.humidity + "%";
       currentWindEl.innerHTML =
@@ -69,7 +68,6 @@ function initPage() {
         "&appid=" +
         APIKey;
       axios.get(forecastQueryURL).then(function (response) {
-        //  Parse response to display forecast for next 5 days underneath current conditions
         console.log(response);
         const forecastEls = document.querySelectorAll(".forecast");
         for (i = 0; i < forecastEls.length; i++) {
@@ -101,7 +99,7 @@ function initPage() {
           const forecastTempEl = document.createElement("p");
           forecastTempEl.innerHTML =
             "Temp: " +
-            k2f(response.data.list[forecastIndex].main.temp) +
+            kelvin2farenheit(response.data.list[forecastIndex].main.temp) +
             " &#176F";
           forecastEls[i].append(forecastTempEl);
           const forecastHumidityEl = document.createElement("p");
@@ -127,8 +125,8 @@ function initPage() {
     searchHistory = [];
     renderSearchHistory();
   });
-
-  function k2f(K) {
+// This will convert the temperature from kelvin to farenheit
+  function kelvin2farenheit(K) {
     return Math.floor((K - 273.15) * 1.8 + 32);
   }
 
