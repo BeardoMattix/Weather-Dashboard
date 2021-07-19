@@ -16,7 +16,7 @@ function initPage() {
 
   const APIKey = "e833b750544d242dcfab03294f768f62";
 // Function to get the current weather based on the user city input.
-  function getWeather(cityName) {
+  function findWeather(cityName) {
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
@@ -115,7 +115,7 @@ function initPage() {
 
   searchEl.addEventListener("click", function () {
     const searchTerm = inputEl.value;
-    getWeather(searchTerm);
+    findWeather(searchTerm);
     searchHistory.push(searchTerm);
     localStorage.setItem("search", JSON.stringify(searchHistory));
     renderSearchHistory();
@@ -139,7 +139,7 @@ function initPage() {
       historyItem.setAttribute("class", "form-control d-block bg-white");
       historyItem.setAttribute("value", searchHistory[i]);
       historyItem.addEventListener("click", function () {
-        getWeather(historyItem.value);
+        findWeather(historyItem.value);
       });
       historyEl.append(historyItem);
     }
@@ -147,7 +147,7 @@ function initPage() {
 
   renderSearchHistory();
   if (searchHistory.length > 0) {
-    getWeather(searchHistory[searchHistory.length - 1]);
+    findWeather(searchHistory[searchHistory.length - 1]);
   }
 }
 initPage();
