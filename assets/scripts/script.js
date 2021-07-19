@@ -25,7 +25,6 @@ function initPage() {
       APIKey;
     axios.get(queryURL).then(function (response) {
       console.log(response);
-      //  Parse response to display current conditions
       const currentDate = new Date(response.data.dt * 1000);
       console.log(currentDate);
       const day = currentDate.getDate();
