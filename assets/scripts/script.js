@@ -14,8 +14,8 @@ function initPage() {
   const historyEl = document.getElementById("history");
   let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
   
-
   const API_KEY = "e833b750544d242dcfab03294f768f62";
+
 // Function to display the current day and time on the main header.
   var update = function () {
     today = moment();
@@ -147,19 +147,19 @@ function initPage() {
     findWeather(searchTerm);
     searchHistory.push(searchTerm);
     localStorage.setItem("search", JSON.stringify(searchHistory));
-    renderSearchHistory();
+    showSearchHist();
   });
 
   clearEl.addEventListener("click", function () {
     searchHistory = [];
-    renderSearchHistory();
+    showSearchHist();
   });
 // This will convert the temperature from kelvin to farenheit
   function kelvin2farenheit(K) {
     return Math.floor((K - 273.15) * 1.8 + 32);
   }
 
-  function renderSearchHistory() {
+  function showSearchHist() {
     historyEl.innerHTML = "";
     for (let i = 0; i < searchHistory.length; i++) {
       const historyItem = document.createElement("input");
@@ -174,7 +174,7 @@ function initPage() {
     }
   }
 
-  renderSearchHistory();
+  showSearchHist();
   if (searchHistory.length > 0) {
     findWeather(searchHistory[searchHistory.length - 1]);
   }
