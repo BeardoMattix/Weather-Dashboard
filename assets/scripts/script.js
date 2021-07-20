@@ -28,7 +28,7 @@ function initPage() {
     setInterval(update);
   }, 1000);
 
-
+// This will display the day, month, and year for the forecast.
   setInterval(() => {
     const time = new Date();
     const month = time.getMonth();
@@ -45,7 +45,7 @@ function initPage() {
     dateEl.innerHTML = days[day] + ", " + months[month] + " " + date;
   }, 1000);
 
-// Function to get the current weather based on the user city input.
+// Function to find the current weather based on the user city input.
   function findWeather(cityName) {
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -62,6 +62,7 @@ function initPage() {
       nameEl.innerHTML =
         response.data.name + " (" + month + "/" + day + "/" + year + ") ";
       let weatherPic = response.data.weather[0].icon;
+      // Grab the weather icon from openweathermap and add it to the html.
       currentPictureEl.setAttribute(
         "src",
         "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png"
@@ -90,7 +91,7 @@ function initPage() {
         currentUVEl.innerHTML = "UV Index: ";
         currentUVEl.append(UVIndex);
       });
-      // This will grab a 5 day forecast using the saved city name and making a call to the API
+      // This will return a 5 day forecast using the saved city name and making a call to the API
       let cityID = response.data.id;
       let forecastQueryURL =
         "https://api.openweathermap.org/data/2.5/forecast?id=" +
@@ -142,7 +143,7 @@ function initPage() {
       });
     });
   }
-
+// Takes the user search input and uses it to find the weather, then adds the search to local storage. 
   searchEl.addEventListener("click", function () {
     const searchTerm = inputEl.value;
     findWeather(searchTerm);
@@ -155,11 +156,12 @@ function initPage() {
     searchHistory = [];
     showSearchHist();
   });
-// This will convert the temperature from kelvin to farenheit
+// This will convert the temperature from kelvin to farenheit. Later realized that the onecall api will convert based on units. I hate math. SMH.
   function kelvin2farenheit(K) {
     return Math.floor((K - 273.15) * 1.8 + 32);
   }
-
+/* Shows the search history below the search bar (using the class of "form-control d-block...""). 
+It stays after you reload the page, even if you click the clear history button, which is not what I wanted. */
   function showSearchHist() {
     historyEl.innerHTML = "";
     for (let i = 0; i < searchHistory.length; i++) {
