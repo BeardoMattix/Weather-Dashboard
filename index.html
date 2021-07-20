@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Righteous&display=swap"
       rel="stylesheet"
     />
     <link
@@ -35,6 +35,16 @@
       <span class="navbar-brand mb-0 h1 w-100 text-center bg-info text-light"
         >Weather Dashboard</span
       >
+      <p
+        id="today-date-banner"
+        class="navbar-brand mb-0 h1 w-100 text-center bg-info text-light"
+      >
+        Today's Date:
+      </p>
+      <p
+        id="currentDay"
+        class="navbar-brand mb-0 h1 w-100 text-center bg-info text-darken-4"
+      ></p>
     </nav>
     <div class="container">
       <div class="row">
@@ -42,7 +52,7 @@
           <p class="search-header my-1">Search for a city</p>
           <div class="input-group mb-3">
             <input
-              id="city-input"
+              id="city-search"
               type="text"
               class="form-control"
               placeholder="Enter city name"
@@ -115,7 +125,8 @@
         </div>
       </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
   </body>

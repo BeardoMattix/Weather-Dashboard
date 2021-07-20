@@ -1,5 +1,6 @@
 function initPage() {
-  const inputEl = document.getElementById("city-input");
+  const inputEl = document.getElementById("city-search");
+  const currentDay = document.querySelector(".currentDay");
   const searchEl = document.getElementById("search-button");
   const clearEl = document.getElementById("clear-history");
   const nameEl = document.getElementById("city-name");
@@ -12,16 +13,44 @@ function initPage() {
   const currentUVEl = document.getElementById("UV-index");
   const historyEl = document.getElementById("history");
   let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
-  console.log(searchHistory);
+  
 
-  const APIKey = "e833b750544d242dcfab03294f768f62";
+  const API_KEY = "e833b750544d242dcfab03294f768f62";
+// Function to display the current day and time on the main header.
+  var update = function () {
+    today = moment();
+    $("#currentDay").text(today.format("dddd MMM Do YYYY h:mm a"));
+  };
+  $(document).ready(function () {
+    today = $("#currentDay");
+    update();
+    setInterval(update);
+  }, 1000);
+
+
+  setInterval(() => {
+    const time = new Date();
+    const month = time.getMonth();
+    const date = time.getDate();
+    const day = time.getDay();
+    const hour = time.getHours();
+    const hoursIn12HrFormat = hour >= 13 ? hour % 12 : hour;
+    const minutes = time.getMinutes();
+    const ampm = hour >= 12 ? "PM" : "AM";
+  
+    timeEl.innerHTML =
+      (hoursIn12HrFormat < 10? '0' +hoursIn12HrFormat : hoursIn12HrFormat) + ":" + (minutes < 10? '0' +minutes : minutes) + " " + `<span id="am-pm>${ampm}</span>`;
+  
+    dateEl.innerHTML = days[day] + ", " + months[month] + " " + date;
+  }, 1000);
+
 // Function to get the current weather based on the user city input.
   function findWeather(cityName) {
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
       cityName +
       "&appid=" +
-      APIKey;
+      API_KEY;
     axios.get(queryURL).then(function (response) {
       console.log(response);
       const currentDate = new Date(response.data.dt * 1000);
@@ -51,7 +80,7 @@ function initPage() {
         "&lon=" +
         lon +
         "&appid=" +
-        APIKey +
+        API_KEY +
         "&cnt=1";
       axios.get(UVQueryURL).then(function (response) {
         let UVIndex = document.createElement("span");
@@ -66,7 +95,7 @@ function initPage() {
         "https://api.openweathermap.org/data/2.5/forecast?id=" +
         cityID +
         "&appid=" +
-        APIKey;
+        API_KEY;
       axios.get(forecastQueryURL).then(function (response) {
         console.log(response);
         const forecastEls = document.querySelectorAll(".forecast");
