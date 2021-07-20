@@ -1,8 +1,19 @@
+:root {
+    background: url('assets/images/hanging-plant.jpg');
+    height: 100vh;
+    background-size: cover;
+}
+
+.navbar {
+    opacity: 0.8;
+}
 .navbar-brand {
     font-family: 'Righteous', cursive;
     font-size: 3.5rem;
     border-radius: 10px;
     text-shadow: 0px 1px 0px black;
+    margin-left: 15px;
+    background-color: rgb(59, 123, 161);
 }
 
 .search-header {
@@ -21,6 +32,8 @@
 .opacity {
     opacity: 0.8;
     border: 1px solid white;
+    box-shadow: 0px 2px 2px black;
+    background-color: rgb(59, 123, 161);
 }
 
 #currentDay {
@@ -38,3 +51,18 @@
     font-family: Arial, Helvetica, sans-serif;
     text-shadow: 0px 1px 0px black;
 }
+
+#big-weather-display {
+    background-color: rgb(59, 123, 161); 
+    opacity: 0.8; 
+    color: white;
+    box-shadow: 0px 3px 3px black;
+    margin-bottom: 30px;
+}
+/* adding some styles to the 5 day forecast title */
+#five-day-forecast {
+ text-shadow: 2px 2px 0px black;
+ text-align: left;
+ font-size: 2.5rem;
+}
+

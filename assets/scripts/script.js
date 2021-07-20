@@ -1,5 +1,6 @@
 function initPage() {
   const inputEl = document.getElementById("city-search");
+  // This will display the current time in the header div.
   const currentDay = document.querySelector(".currentDay");
   const searchEl = document.getElementById("search-button");
   const clearEl = document.getElementById("clear-history");

@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="./assets/styles/style.css" />
     <title>Weather Dashboard</title>
   </head>
+  <!-- I couldn't figure out how to get the background image to show up using css, so I added it in here and it worked. I know I should steer clear of inline styling. -->
   <body
     class="bg-image text-dark"
     style="
@@ -31,19 +32,20 @@
       background-size: cover;
     "
   >
+  <main>
     <nav class="navbar">
-      <span class="navbar-brand mb-0 h1 w-100 text-center bg-info text-light"
+      <span class="navbar-brand mb-0 h1 w-100 text-center text-light"
         >Weather Dashboard</span
       >
       <p
         id="today-date-banner"
-        class="navbar-brand mb-0 h1 w-100 text-center bg-info text-light"
+        class="navbar-brand mb-0 h1 w-100 text-center text-light"
       >
         Today's Date:
       </p>
       <p
         id="currentDay"
-        class="navbar-brand mb-0 h1 w-100 text-center bg-info text-darken-4"
+        class="navbar-brand mb-0 h1 w-100 text-center text-darken-4"
       ></p>
     </nav>
     <div class="container">
@@ -59,19 +61,19 @@
               aria-label="Enter city name"
             />
             <div class="input-group-append">
-              <button class="btn btn-info" type="button" id="search-button">
+              <button class="btn " type="button" id="search-button">
                 <i class="fas fa-search"></i>
               </button>
             </div>
           </div>
-          <button class="btn btn-info mb-3" type="button" id="clear-history">
+          <button class="btn  mb-3" type="button" id="clear-history">
             Clear history
           </button>
           <form id="history"></form>
         </div>
         <div class="col-8">
-          <div class="row mr-0">
-            <div class="col-12 border border-light m-3 rounded">
+          <div class="row mr-0 border border-light rounded" id="big-weather-display">
+            <div class="col-12">
               <div class="row">
                 <div class="col-12">
                   <span id="city-name" class="city-name align-middle"></span>
@@ -101,25 +103,25 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12">
-              <h3>5 Day Forecast</h3>
+            <div class="col-12 text-white" id="five-day-forecast">
+              <h3 id="five-day-forecast">5 Day Forecast</h3>
             </div>
           </div>
           <div class="row">
             <div
-              class="col forecast bg-info text-white ml-3 mb-3 rounded opacity"
+              class="col forecast text-white mb-3 mr-3 rounded opacity" 
             ></div>
             <div
-              class="col forecast bg-info text-white ml-3 mb-3 rounded opacity"
+              class="col forecast text-white mb-3 mr-3 rounded opacity" 
             ></div>
             <div
-              class="col forecast bg-info text-white ml-3 mb-3 rounded opacity"
+              class="col forecast text-white mb-3 mr-3 rounded opacity" 
             ></div>
             <div
-              class="col forecast bg-info text-white ml-3 mb-3 rounded opacity"
+              class="col forecast text-white mb-3 mr-3 rounded opacity" 
             ></div>
             <div
-              class="col forecast bg-info text-white ml-3 mb-3 rounded opacity"
+              class="col forecast text-white mb-3 mr-3 rounded opacity"
             ></div>
           </div>
         </div>
@@ -127,7 +129,9 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- I used Axios because it has built in promise support and the syntax is easier to rememeber -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./assets/scripts/script.js"></script>
+  </main>
   </body>
 </html>
