@@ -14,10 +14,10 @@ function initPage() {
   const currentUVEl = document.getElementById("UV-index");
   const historyEl = document.getElementById("history");
   let searchHistory = JSON.parse(localStorage.getItem("search")) || [];
-  
+
   const API_KEY = "e833b750544d242dcfab03294f768f62";
 
-// Function to display the current day and time on the main header.
+  // Function to display the current day and time on the main header.
   var update = function () {
     today = moment();
     $("#currentDay").text(today.format("dddd MMM Do YYYY h:mm a"));
@@ -28,7 +28,7 @@ function initPage() {
     setInterval(update);
   }, 1000);
 
-// This will display the day, month, and year for the forecast.
+  // This will display the day, month, and year for the forecast.
   setInterval(() => {
     const time = new Date();
     const month = time.getMonth();
@@ -38,14 +38,18 @@ function initPage() {
     const hoursIn12HrFormat = hour >= 13 ? hour % 12 : hour;
     const minutes = time.getMinutes();
     const ampm = hour >= 12 ? "PM" : "AM";
-  
+
     timeEl.innerHTML =
-      (hoursIn12HrFormat < 10? '0' +hoursIn12HrFormat : hoursIn12HrFormat) + ":" + (minutes < 10? '0' +minutes : minutes) + " " + `<span id="am-pm>${ampm}</span>`;
-  
+      (hoursIn12HrFormat < 10 ? "0" + hoursIn12HrFormat : hoursIn12HrFormat) +
+      ":" +
+      (minutes < 10 ? "0" + minutes : minutes) +
+      " " +
+      `<span id="am-pm>${ampm}</span>`;
+
     dateEl.innerHTML = days[day] + ", " + months[month] + " " + date;
   }, 1000);
 
-// Function to find the current weather based on the user city input.
+  // Function to find the current weather based on the user city input.
   function findWeather(cityName) {
     let queryURL =
       "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -53,9 +57,7 @@ function initPage() {
       "&appid=" +
       API_KEY;
     axios.get(queryURL).then(function (response) {
-      console.log(response);
       const currentDate = new Date(response.data.dt * 1000);
-      console.log(currentDate);
       const day = currentDate.getDate();
       const month = currentDate.getMonth() + 1;
       const year = currentDate.getFullYear();
@@ -67,13 +69,17 @@ function initPage() {
         "src",
         "https://openweathermap.org/img/wn/" + weatherPic + "@2x.png"
       );
-      currentPictureEl.setAttribute("alt", response.data.weather[0].description);
+      currentPictureEl.setAttribute(
+        "alt",
+        response.data.weather[0].description
+      );
       currentTempEl.innerHTML =
         "Temperature: " + kelvin2farenheit(response.data.main.temp) + " &#176F";
       currentHumidityEl.innerHTML =
         "Humidity: " + response.data.main.humidity + "%";
       currentWindEl.innerHTML =
         "Wind Speed: " + response.data.wind.speed + " MPH";
+        // this records the latitude and longitude and adds them to the api url.
       let lat = response.data.coord.lat;
       let lon = response.data.coord.lon;
       let UVQueryURL =
@@ -91,7 +97,7 @@ function initPage() {
         currentUVEl.innerHTML = "UV Index: ";
         currentUVEl.append(UVIndex);
       });
-      // This will return a 5 day forecast using the saved city name and making a call to the API
+      // This will return a 5 day forecast using the saved city name and by making a call to the API
       let cityID = response.data.id;
       let forecastQueryURL =
         "https://api.openweathermap.org/data/2.5/forecast?id=" +
@@ -143,7 +149,7 @@ function initPage() {
       });
     });
   }
-// Takes the user search input and uses it to find the weather, then adds the search to local storage. 
+  // Takes the user search input and uses it to find the weather, then adds the search to local storage.
   searchEl.addEventListener("click", function () {
     const searchTerm = inputEl.value;
     findWeather(searchTerm);
@@ -156,17 +162,18 @@ function initPage() {
     searchHistory = [];
     showSearchHist();
   });
-// This will convert the temperature from kelvin to farenheit. Later realized that the onecall api will convert based on units. I hate math. SMH.
+  // This will convert the temperature from kelvin to farenheit. Later realized that the onecall api will convert based on units. I hate math. SMH.
   function kelvin2farenheit(K) {
     return Math.floor((K - 273.15) * 1.8 + 32);
   }
-/* Shows the search history below the search bar (using the class of "form-control d-block...""). 
+  /* Shows the search history below the search bar (using the class of "form-control d-block...""). 
 It stays after you reload the page, even if you click the clear history button, which is not what I wanted. */
   function showSearchHist() {
     historyEl.innerHTML = "";
     for (let i = 0; i < searchHistory.length; i++) {
       const historyItem = document.createElement("input");
-      historyItem.setAttribute("type", "text");
+      historyItem.setAttribute("type");
+      historyItem.setAttribute("text");
       historyItem.setAttribute("readonly", true);
       historyItem.setAttribute("class", "form-control d-block bg-white");
       historyItem.setAttribute("value", searchHistory[i]);
